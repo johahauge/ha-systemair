@@ -10,6 +10,36 @@
         slave: 1
         input_type: holding
         unique_id: SYSTEMAIR_REG_FAN_SPEED_LEVEL
+      - name: "Supply fan flow low"
+        address: 101
+        slave: 1
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_FAN_SF_FLOW_LOW
+      - name: "Extract fan flow low"
+        address: 102
+        slave: 1
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_FAN_EF_FLOW_LOW
+      - name: "Supply fan flow normal"
+        address: 103
+        slave: 1
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_FAN_SF_FLOW_NOM
+      - name: "Extract fan flow normal"
+        address: 104
+        slave: 1
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_FAN_EF_FLOW_NOM
+      - name: "Supply fan flow high"
+        address: 105
+        slave: 1
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_FAN_SF_FLOW_HIGH
+      - name: "Extract fan flow high"
+        address: 106
+        slave: 1
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_FAN_EF_FLOW_HIGH
       - name: "Fan flow units"
         address: 107
         slave: 1
