@@ -1,0 +1,238 @@
+  - type: tcp
+    host: 192.168.10.30
+    port: 502
+    delay: 5
+    sensors:
+
+# VR400 Registers for fan control
+      - name: "Viftenivå"
+        address: 100
+        slave: 1
+        input_type: holding
+        offset: 0
+        scan_interval: 10
+        unique_id: VR400_REG_FAN_SPEED_LEVEL
+      - name: "Måleenhet"
+        address: 107
+        slave: 1
+        input_type: holding
+        scan_interval: 300
+        unique_id: VR400_REG_FAN_FLOW_UNITS
+      - name: "Tilluftsvifte Volt"
+        address: 108
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        device_class: voltage
+        unit_of_measurement: V
+        state_class: measurement
+        scale: 0.1
+        precision: 1
+        unique_id: VR400_REG_FAN_SF_PWM
+      - name: "Uttrekksvifte Volt"
+        address: 109
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        device_class: voltage
+        unit_of_measurement: V
+        state_class: measurement
+        scale: 0.1
+        precision: 1
+        unique_id: VR400_REG_FAN_EF_PWM
+      - name: "Viftehastighet tilluft"
+        unit_of_measurement: RPM
+        address: 110
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        unique_id: VR400_REG_FAN_SF_RPM
+      - name: "Viftehastighet uttrekk"
+        unit_of_measurement: RPM
+        address: 111
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        unique_id: VR400_REG_FAN_EF_RPM
+
+# VR400  Registers for heater control
+      - name: "Varmeelement type"
+        address: 200
+        slave: 1
+        scan_interval: 300
+        input_type: holding
+        unique_id: VR400_REG_HC_HEATER_TYPE
+      - name: "Temperaturnivå"
+        address: 206
+        slave: 1
+        scan_interval: 10
+        input_type: holding
+        unique_id: VR400_REG_HC_TEMP_LVL
+      - name: "Settemperatur ventilasjon"
+        address: 207
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        count: 1
+        scale: 0.1
+        offset: 0
+        precision: 1
+        unique_id: VR400_REG_HC_TEMP_SP
+      - name: "Temperatur SUPPLY"
+        address: 213
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        count: 1
+        scale: 0.1
+        offset: 0
+        precision: 1
+        unique_id: VR400_REG_REG_HC_TEMP_SUPPLY
+      - name: "Temperatur EXTRACT"
+        address: 214
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        count: 1
+        scale: 0.1
+        offset: 0
+        precision: 1
+        unique_id: VR400_REG_HC_TEMP_EXTRACT
+      - name: "Temperatur EXHAUST/PREHEAT"
+        address: 215
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        count: 1
+        scale: 0.1
+        offset: 0
+        precision: 1
+        unique_id: VR400_REG_HC_TEMP_EXHAUST/PREHEAT
+      - name: "Temperatur OVERHEATING/FROSTPROTECT"
+        address: 216
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        count: 1
+        scale: 0.1
+        offset: 0
+        precision: 1
+        unique_id: VR400_REG_HC_TEMP_OVERHEATING/FROSTPROTECT
+      - name: "Temperatur OUTDOOR"
+        address: 217
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        count: 1
+        scale: 0.1
+        offset: 0
+        precision: 1
+        unique_id: VR400_REG_HC_TEMP_OUTDOOR
+      - name: "Temperatur sett grader"
+        address: 221
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        device_class: temperature
+        state_class: measurement
+        unit_of_measurement: °C
+        count: 1
+        scale: 0.1
+        offset: 0
+        precision: 1
+        unique_id: VR400_REG_HC_TEMP_SP_DEG
+      - name: "Type forvarmer"
+        address: 219
+        slave: 1
+        scan_interval: 20
+        input_type: holding
+        unique_id: VR400_REG_HC_PREHEATER_TYPE
+
+# VR400 Registers for the damper
+      - name: "Damper Volt"
+        address: 300
+        slave: 1
+        scan_interval: 10
+        input_type: holding
+        device_class: voltage
+        unit_of_measurement: V
+        scale: 0.1
+        precision: 1
+        unique_id: VR400_REG_DAMPER_PWM
+
+# VR400 Registers for RH sensor
+      - name: "RH-sensor"
+        address: 380
+        slave: 1
+        scan_interval: 300
+        input_type: holding
+        unit_of_measurement: "%"
+        state_class: measurement
+        unique_id: VR400_RH_SENSOR_VALUE
+
+# VR400 Registers for system parameters
+      - name: "Type aggregat"
+        address: 500
+        slave: 1
+        scan_interval: 300
+        input_type: holding
+        unique_id: VR400_REG_SYSTEM_TYPE
+
+# VR400 Registers for the filter
+      - name: "Filtertid"
+        address: 601
+        slave: 1
+        scan_interval: 900
+        input_type: holding
+        unit_of_measurement: dager
+        unique_id: VR400_FILTER_DAYS
+
+# VR400 registers for alarms
+      - name: "Alarmer ventilasjon"
+        address: 800
+        slave: 1
+        scan_interval: 20
+        input_type: input
+        unique_id: VR400_REG_ALARMS_ALL
+
+# VR400 Register for demand control
+      - name: "RH Vinter"
+        address: 862
+        slave: 1
+        scan_interval: 10
+        unit_of_measurement: "%"
+        state_class: measurement
+        input_type: holding
+        unique_id: VR400_REG_DEMC_RH_SP_WINTER
+      - name: "Sommer-/Vintermodus"
+        address: 863
+        slave: 1
+        scan_interval: 120
+        input_type: holding
+        unique_id: VR400_REG_DEMC_SUMMER_WINNTER_MODE
+
+# VR400  Register for wireless network
+      - name: "Trådløse tilkoblinger"
+        address: 900
+        slave: 1
+        scan_interval: 120
+        input_type: holding
+        unique_id: VR400_REG_WL_NODE_1_TYPE
