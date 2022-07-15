@@ -44,10 +44,6 @@
           {% else %}
             Ukjent
           {%- endif %}
-      - name: "Strømprisnivå"
-        unique_id: tibber_stromprisniva
-        state: >
-          {{ state_attr('sensor.electricity_price_tibber', 'price_level') }}
       - name: "Viftehastighet"
         unique_id: VR400_VIFTENIVA
         state: >
