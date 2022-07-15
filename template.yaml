@@ -1,61 +1,60 @@
-
   - sensor:
-      - name: "Gjenvinningsgrad"
+      - name: "Reuse factor"
         unit_of_measurement: "%"
         device_class: power_factor
-        unique_id: VR400_GJENVINNINGSGRAD
+        unique_id: SYSTEMAIR_FACTOR
         state: >
-          {{((((states.sensor.temperatur_supply.state | float ) - (states.sensor.temperatur_outdoor.state | float)) / ((states.sensor.temperatur_extract.state | float ) - (states.sensor.temperatur_outdoor.state | float))) * 100) | round(1) }}
-      - name: "Aggregattype"
-        unique_id: SYSTEMAIR_AGGREGAT_TYPE
+          {{((((states.sensor.supply_temperature.state | float ) - (states.sensor.outdoor_temperature.state | float)) / ((states.sensor.extract_temperature.state | float ) - (states.outdoor_temperature.state | float))) * 100) | round(1) }}
+      - name: "System type"
+        unique_id: SYSTEMAIR_SYSTEM_TYPE_TEMPLATE
         state: >
-          {% if states('sensor.type_aggregat') | int == 0 %}
+          {% if states('sensor.system_type') | int == 0 %}
             VR400
-          {% elif states('sensor.type_aggregat') | int == 1 %}
+          {% elif states('sensor.system_type') | int == 1 %}
             VR700
-          {% elif states('sensor.type_aggregat') | int == 2 %}
+          {% elif states('sensor.system_type') | int == 2 %}
            VR700DK
-          {% elif states('sensor.type_aggregat') | int == 3 %}
+          {% elif states('sensor.system_type') | int == 3 %}
             VR400DE
-          {% elif states('sensor.type_aggregat') | int == 4 %}
+          {% elif states('sensor.system_type') | int == 4 %}
             VTC300
-          {% elif states('sensor.type_aggregat') | int == 5 %}
+          {% elif states('sensor.system_type') | int == 5 %}
             VTC700
-          {% elif states('sensor.type_aggregat') | int == 12 %}
+          {% elif states('sensor.system_type') | int == 12 %}
             VTR150K
-          {% elif states('sensor.type_aggregat') | int == 13 %}
+          {% elif states('sensor.system_type') | int == 13 %}
             VTR200B
-          {% elif states('sensor.type_aggregat') | int == 14 %}
+          {% elif states('sensor.system_type') | int == 14 %}
             VSR300
-          {% elif states('sensor.type_aggregat') | int == 15 %}
+          {% elif states('sensor.system_type') | int == 15 %}
             VSR500
-          {% elif states('sensor.type_aggregat') | int == 16 %}
+          {% elif states('sensor.system_type') | int == 16 %}
             VSR150
-          {% elif states('sensor.type_aggregat') | int == 17 %}
+          {% elif states('sensor.system_type') | int == 17 %}
             VTR300
-          {% elif states('sensor.type_aggregat') | int == 18 %}
+          {% elif states('sensor.system_type') | int == 18 %}
             VTR500
-          {% elif states('sensor.type_aggregat') | int == 19 %}
+          {% elif states('sensor.system_type') | int == 19 %}
             VSR300DE
-          {% elif states('sensor.type_aggregat') | int == 20 %}
+          {% elif states('sensor.system_type') | int == 20 %}
             VTC200
-          {% elif states('sensor.type_aggregat') | int == 21 %}
+          {% elif states('sensor.system_type') | int == 21 %}
             VTC100
           {% else %}
-            Ukjent
+            Unknown or not supported
           {%- endif %}
-      - name: "Viftehastighet"
-        unique_id: VR400_VIFTENIVA
+      - name: "Fan speed level"
+        unique_id: SYSTEMAIR_FAN_SPEED_LEVEL_TEMPLATE
         state: >
-          {{ states('sensor.vifteniva') | int }}
+          {{ states('sensor.fan_speed_level') | int }}
         icon: >
-          {% if is_state("sensor.vifteniva", "1") %}
+          {% if is_state("sensor.fan_speed_level", "1") %}
             mdi:fan-speed-1
-          {% elif is_state("sensor.vifteniva", "2") %}
+          {% elif is_state("sensor.fan_speed_level", "2") %}
             mdi:fan-speed-2
-          {% elif is_state("sensor.vifteniva", "3") %}
+          {% elif is_state("sensor.fan_speed_level", "3") %}
             mdi:fan-speed-3
-          {% elif is_state("sensor.vifteniva", "4") %}
+          {% elif is_state("sensor.fan_speed_level", "4") %}
             mdi:fan-chevron-up
           {% else %}
             mdi:fan-off

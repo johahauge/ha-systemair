@@ -1,0 +1,2 @@
+modbus: !include modbus.yaml
+template: !include template.yaml
