@@ -1,0 +1,66 @@
+
+  - sensor:
+      - name: "Gjenvinningsgrad"
+        unit_of_measurement: "%"
+        device_class: power_factor
+        unique_id: VR400_GJENVINNINGSGRAD
+        state: >
+          {{((((states.sensor.temperatur_supply.state | float ) - (states.sensor.temperatur_outdoor.state | float)) / ((states.sensor.temperatur_extract.state | float ) - (states.sensor.temperatur_outdoor.state | float))) * 100) | round(1) }}
+      - name: "Aggregattype"
+        unique_id: SYSTEMAIR_AGGREGAT_TYPE
+        state: >
+          {% if states('sensor.type_aggregat') | int == 0 %}
+            VR400
+          {% elif states('sensor.type_aggregat') | int == 1 %}
+            VR700
+          {% elif states('sensor.type_aggregat') | int == 2 %}
+           VR700DK
+          {% elif states('sensor.type_aggregat') | int == 3 %}
+            VR400DE
+          {% elif states('sensor.type_aggregat') | int == 4 %}
+            VTC300
+          {% elif states('sensor.type_aggregat') | int == 5 %}
+            VTC700
+          {% elif states('sensor.type_aggregat') | int == 12 %}
+            VTR150K
+          {% elif states('sensor.type_aggregat') | int == 13 %}
+            VTR200B
+          {% elif states('sensor.type_aggregat') | int == 14 %}
+            VSR300
+          {% elif states('sensor.type_aggregat') | int == 15 %}
+            VSR500
+          {% elif states('sensor.type_aggregat') | int == 16 %}
+            VSR150
+          {% elif states('sensor.type_aggregat') | int == 17 %}
+            VTR300
+          {% elif states('sensor.type_aggregat') | int == 18 %}
+            VTR500
+          {% elif states('sensor.type_aggregat') | int == 19 %}
+            VSR300DE
+          {% elif states('sensor.type_aggregat') | int == 20 %}
+            VTC200
+          {% elif states('sensor.type_aggregat') | int == 21 %}
+            VTC100
+          {% else %}
+            Ukjent
+          {%- endif %}
+      - name: "Strømprisnivå"
+        unique_id: tibber_stromprisniva
+        state: >
+          {{ state_attr('sensor.electricity_price_tibber', 'price_level') }}
+      - name: "Viftehastighet"
+        unique_id: VR400_VIFTENIVA
+        state: >
+          {{ states('sensor.vifteniva') | int }}
+        icon: >
+          {% if is_state("sensor.vifteniva", "1") %}
+            mdi:fan-speed-1
+          {% elif is_state("sensor.vifteniva", "2") %}
+            mdi:fan-speed-2
+          {% elif is_state("sensor.vifteniva", "3") %}
+            mdi:fan-speed-3
+          {% elif is_state("sensor.vifteniva", "4") %}
+            mdi:fan-chevron-up
+          {% else %}
+            mdi:fan-off
+          {% endif %}
