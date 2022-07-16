@@ -77,6 +77,16 @@
         slave: 1
         input_type: holding
         unique_id: SYSTEMAIR_REG_FAN_EF_RPM
+      - name: "Allow manual fan stop"
+        address: 113
+        slave: 1
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_FAN_ALLOW_MANUAL_FAN_STOP
+      - name: "Supply fan system curve"
+        address: 135
+        slave: 1
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_FAN_SYSTEM_CURVE_SF
 
 #  Registers for heater control
       - name: "Heater type"
@@ -214,7 +224,7 @@
         slave: 1
         scan_interval: 900
         input_type: holding
-        unit_of_measurement: dager
+        unit_of_measurement: days
         unique_id: SYSTEMAIR_FILTER_DAYS
 
 # registers for alarms

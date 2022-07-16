@@ -59,3 +59,11 @@
           {% else %}
             mdi:fan-off
           {% endif %}
+      - name: "Flow measurement units"
+        unique_id: SYSTEMAIR_FLOW_MEAS_UNITS
+        state: >
+          {% if states('sensor.flow_measurement_units') | int = 0 %}
+            Flows are measured in l/s
+          {% elif %}
+            Flows are measured in m3/h
+          {% endif %}
