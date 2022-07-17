@@ -20,7 +20,7 @@ These registers applies to following older models:
     VTC200
     VTC100
 
-Does not apply to the newer SAVE-series.
+Does not apply to the newer SAVE-series. Note: Only tested with VR400.
 
 ## Requirements
 - Home Assistant
