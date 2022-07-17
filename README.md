@@ -25,7 +25,7 @@ Does not apply to the newer SAVE-series.
 ## Requirements
 - Home Assistant
 - Systemair model that supports modbus communication. You might need to replace the motherboard with the newer PCU-EC4
-- A device to send Modbus as TCP
+- A device to send Modbus as TCP connected to the motherboard
 
 ## Implementing
 Copy the content or files to your Home Assistant installation in the config directory. You can include the content directly into the configuration.yaml file, but that will be messy.
