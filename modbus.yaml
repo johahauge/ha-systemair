@@ -154,7 +154,7 @@
         offset: 0
         precision: 1
         unique_id: SYSTEMAIR_REG_REG_HC_TEMP_SUPPLY
-      - name: "Temperatur Eextract"
+      - name: "Temperatur Extract"
         address: 214
         slave: 1
         scan_interval: 20
@@ -237,7 +237,7 @@
         scale: 0.1
         precision: 1
         unique_id: SYSTEMAIR_REG_DAMPER_PWM
-      - name: "Rotor State"
+      - name: "Rotor State Sensor"
         address: 350
         slave: 1
         input_type: holding
@@ -270,37 +270,37 @@
         scan_interval: 300
         input_type: holding
         unique_id: SYSTEMAIR_REG_SYSTEM_TYPE
-      - name: "Main program version, high"
+      - name: "Main Program Version High"
         address: 501
         slave: 1
         scan_interval: 300
         input_type: holding
         unique_id: SYSTEMAIR_REG_SYSTEM_PROG_V_HIGH
-      - name: "Main program version, middle"
+      - name: "Main Program Version Middle"
         address: 502
         slave: 1
         scan_interval: 300
         input_type: holding
         unique_id: SYSTEMAIR_REG_SYSTEM_PROG_V_MID
-      - name: "Main program version, low"
+      - name: "Main Program Version Low"
         address: 503
         slave: 1
         scan_interval: 300
         input_type: holding
         unique_id: SYSTEMAIR_REG_SYSTEM_PROG_V_LOW
-      - name: "Boot program version, high"
+      - name: "Boot Program Version High"
         address: 504
         slave: 1
         scan_interval: 300
         input_type: holding
         unique_id: SYSTEMAIR_REG_SYSTEM_BOOT_PROG_V_HIGH
-      - name: "Boot program version, middle"
+      - name: "Boot Program Version Middle"
         address: 505
         slave: 1
         scan_interval: 300
         input_type: holding
         unique_id: SYSTEMAIR_REG_SYSTEM_BOOT_PROG_V_MID
-      - name: "Boot program version, low"
+      - name: "Boot Program Version Low"
         address: 506
         slave: 1
         scan_interval: 300
