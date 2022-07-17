@@ -1,7 +1,8 @@
 # Systemair on Home Assistant
-Systemair modbus yaml-files for Home Assistant with modbus over TCP. Copy the content or files to your Home Assistant installation.
+Systemair modbus yaml-files for Home Assistant with modbus over TCP. 
 
-Applies to older models:
+## Applies to
+These registers applies to following older models:
     VR400
     VR700
     VR700DK
@@ -19,6 +20,15 @@ Applies to older models:
     VTC200
     VTC100
 
-Not all registers are included.
-Reference the Systemair modbus PDF for more information and registers. 
-You have to do some manual editing to make it work with your setup.
+Does not apply to the newer SAVE-series.
+
+## Requirements
+- Home Assistant
+- Systemair model that supports modbus communication. You might need to replace the motherboard with the newer PCU-EC4
+- A device to send Modbus as TCP
+
+## Implementing
+Copy the content or files to your Home Assistant installation in the config directory. You can include the content directly into the configuration.yaml file, but that will be messy.
+
+Not all registers are included. Please reference the Systemair modbus PDF for more information and registers. 
+You might have to do some manual editing to make it work with your setup.
