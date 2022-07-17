@@ -1,11 +1,11 @@
   - sensor:
-      - name: "Reuse factor"
+      - name: "Recycle Rate"
         unit_of_measurement: "%"
         device_class: power_factor
-        unique_id: SYSTEMAIR_FACTOR
+        unique_id: SYSTEMAIR_RECYCLE_RATE_TEMPLATE
         state: >
-          {{((((states.sensor.supply_temperature.state | float ) - (states.sensor.outdoor_temperature.state | float)) / ((states.sensor.extract_temperature.state | float ) - (states.outdoor_temperature.state | float))) * 100) | round(1) }}
-      - name: "System type"
+          {{((((states.sensor.temperature_supply.state | float ) - (states.sensor.temperature_outdoor.state | float)) / ((states.sensor.temperature_extract.state | float ) - (states.temperature_outdoor.state | float))) * 100) | round(1) }}
+      - name: "Systemair System Type"
         unique_id: SYSTEMAIR_SYSTEM_TYPE_TEMPLATE
         state: >
           {% if states('sensor.system_type') | int == 0 %}
@@ -43,10 +43,30 @@
           {% else %}
             Unknown or not supported
           {%- endif %}
-      - name: "Fan speed level"
+      - name: "Fan Control Type"
+        unique_id: SYSTEMAIR_FAN_CONTROL_TYPE_TEMPLATE
+        state: >
+          {% if states('sensor.fan_control_type') | int == 0 %}
+            Air flow
+          {% elif states('sensor.fan_control_type') | int == 1 %}
+            Speed
+          {% else %}
+            N/A
+          {%- endif %}
+      - name: "Fan Speed Level"
         unique_id: SYSTEMAIR_FAN_SPEED_LEVEL_TEMPLATE
         state: >
-          {{ states('sensor.fan_speed_level') | int }}
+          {% if is_state("sensor.fan_speed_level", "1") %}
+            Low
+          {% elif is_state("sensor.fan_speed_level", "2") %}
+            Medium
+          {% elif is_state("sensor.fan_speed_level", "3") %}
+            High
+          {% elif is_state("sensor.fan_speed_level", "4") %}
+            Auto
+          {% else %}
+            Off
+          {% endif %}
         icon: >
           {% if is_state("sensor.fan_speed_level", "1") %}
             mdi:fan-speed-1
@@ -67,3 +87,42 @@
           {% elif %}
             Flows are measured in m3/h
           {% endif %}
+      - name: "Version Number Main"
+        unique_id: SYSTEMAIT_MAIN_VERSION_TEMPLATE
+        state: >
+          {{ states('sensor.main_program_version_high') | int }}.{{ states('sensor.main_program_version_middle') | int }}.{{ states('sensor.main_program_version_low') | int }}
+      - name: "Version Number Boot"
+        unique_id: SYSTEMAIT_BOOT_VERSION_TEMPLATE
+        state: >
+          {{ states('sensor.boot_program_version_high') | int }}.{{ states('sensor.boot_program_version_middle') | int }}.{{ states('sensor.boot_program_version_low') | int }}
+      - name: "Rotor State"
+        unique_id: SYSTEMAIR_ROTOR_STATE_TEMPLATE
+        state: >
+          {% if states('sensor.rotor_state_sensor') | int == 0 %}
+            Normal
+          {% elif states('sensor.rotor_state_sensor') | int == 1 %}
+            Rotor fault assumed
+          {% elif states('sensor.rotor_state_sensor') | int == 2 %}
+            Rotor fault detected
+          {% elif states('sensor.rotor_state_sensor') | int == 3 %}
+            Summer mode conditions valid, but summer mode not yet active
+          {% elif states('sensor.rotor_state_sensor') | int == 4 %}
+            Summer mode
+          {% elif states('sensor.rotor_state_sensor') | int == 5 %}
+            Waiting to go out of Manual summer mode due to temperature conditions
+          {% elif states('sensor.rotor_state_sensor') | int == 6 %}
+            Manual summer mode
+          {% elif states('sensor.rotor_state_sensor') | int == 7 %}
+            Rotor cleaning during summer mode
+          {% elif states('sensor.rotor_state_sensor') | int == 8 %}
+            Rotor cleaning during manual summer mode
+          {% elif states('sensor.rotor_state_sensor') | int == 9 %}
+            Fans off
+          {% elif states('sensor.rotor_state_sensor') | int == 10 %}
+            Rotor cleaning during fans off
+          {% elif states('sensor.rotor_state_sensor') | int == 10 %}
+            Rotor fault, conditions for rotor fault not valid anymore
+          {% else %}
+            Ukjent
+          {%- endif %}
+          
