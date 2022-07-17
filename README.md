@@ -32,3 +32,6 @@ Copy the content or files to your Home Assistant installation in the config dire
 
 Not all registers are included. Please reference the Systemair modbus PDF for more information and registers. 
 You might have to do some manual editing to make it work with your setup.
+
+## Registers
+In the Modbus reference, use the register address - 1.
