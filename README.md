@@ -28,10 +28,13 @@ Does not apply to the newer SAVE-series. Note: Only tested with VR400.
 - A device to send Modbus as TCP connected to the motherboard
 
 ## Implementing
-Copy the content or files to your Home Assistant installation in the config directory. You can include the content directly into the configuration.yaml file, but that will be messy.
+Copy the content of the files or the files themselves to your Home Assistant installation in the config directory. You can include the content directly into the configuration.yaml file, but that will be messy.
 
 Not all registers are included. Please reference the Systemair modbus PDF for more information and registers. 
 You might have to do some manual editing to make it work with your setup.
 
 ## Registers
 In the Modbus reference, use the register address - 1.
+
+## Templates
+If you change any of the entities ID's (change the names in the modbus.yaml file), you need to make corresponding changes to the templates to make them work.
