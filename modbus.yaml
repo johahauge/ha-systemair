@@ -1,53 +1,63 @@
   - type: tcp
-    host: IP
+    host: YOUR_IP
     port: 502
     delay: 5
+    close_comm_on_error: true
+    retries: 5
     sensors:
-
-# Registers for fan control
-      - name: "Fan speed level"
+      # 1xx - Registers for fan control
+      - name: "Fan Speed Level"
         address: 100
         slave: 1
         input_type: holding
+        offset: 0
         unique_id: SYSTEMAIR_REG_FAN_SPEED_LEVEL
-      - name: "Supply fan flow low"
+      - name: "Supply Fan Flow Low"
         address: 101
         slave: 1
         input_type: holding
+        scan_interval: 30
         unique_id: SYSTEMAIR_REG_FAN_SF_FLOW_LOW
       - name: "Extract fan flow low"
         address: 102
         slave: 1
         input_type: holding
+        scan_interval: 30
         unique_id: SYSTEMAIR_REG_FAN_EF_FLOW_LOW
-      - name: "Supply fan flow normal"
+      - name: "Supply Fan Flow Normal"
         address: 103
         slave: 1
         input_type: holding
+        scan_interval: 30
         unique_id: SYSTEMAIR_REG_FAN_SF_FLOW_NOM
-      - name: "Extract fan flow normal"
+      - name: "Extract Fan Flow Normal"
         address: 104
         slave: 1
         input_type: holding
+        scan_interval: 30
         unique_id: SYSTEMAIR_REG_FAN_EF_FLOW_NOM
-      - name: "Supply fan flow high"
+      - name: "Supply Fan Flow High"
         address: 105
         slave: 1
         input_type: holding
+        scan_interval: 30
         unique_id: SYSTEMAIR_REG_FAN_SF_FLOW_HIGH
-      - name: "Extract fan flow high"
+      - name: "Extract Fan Flow High"
         address: 106
         slave: 1
         input_type: holding
+        scan_interval: 30
         unique_id: SYSTEMAIR_REG_FAN_EF_FLOW_HIGH
-      - name: "Fan flow units"
+      - name: "Flow Units"
         address: 107
         slave: 1
         input_type: holding
+        scan_interval: 300
         unique_id: SYSTEMAIR_REG_FAN_FLOW_UNITS
-      - name: "Supply fan voltage"
+      - name: "Supply Fan Power Measure"
         address: 108
         slave: 1
+        scan_interval: 20
         input_type: holding
         device_class: voltage
         unit_of_measurement: V
@@ -55,9 +65,10 @@
         scale: 0.1
         precision: 1
         unique_id: SYSTEMAIR_REG_FAN_SF_PWM
-      - name: "Extract fan voltage"
+      - name: "Extract Fan Power Measure"
         address: 109
         slave: 1
+        scan_interval: 20
         input_type: holding
         device_class: voltage
         unit_of_measurement: V
@@ -65,43 +76,62 @@
         scale: 0.1
         precision: 1
         unique_id: SYSTEMAIR_REG_FAN_EF_PWM
-      - name: "Supply fan RPM"
+      - name: "Supply Fan RPM"
         unit_of_measurement: RPM
         address: 110
         slave: 1
         input_type: holding
         unique_id: SYSTEMAIR_REG_FAN_SF_RPM
-      - name: "Extract fan RPM"
+      - name: "Extract Fan RPM"
         unit_of_measurement: RPM
         address: 111
         slave: 1
         input_type: holding
         unique_id: SYSTEMAIR_REG_FAN_EF_RPM
-      - name: "Allow manual fan stop"
+      - name: "Allow Manual Fan Stop"
         address: 113
         slave: 1
         input_type: holding
         unique_id: SYSTEMAIR_REG_FAN_ALLOW_MANUAL_FAN_STOP
-      - name: "Supply fan system curve"
+      - name: "Supply Fan System Curve"
         address: 135
         slave: 1
         input_type: holding
         unique_id: SYSTEMAIR_REG_FAN_SYSTEM_CURVE_SF
-
-#  Registers for heater control
-      - name: "Heater type"
-        address: 200
+      - name: "Extract Fan System Curve"
+        address: 136
         slave: 1
         input_type: holding
+        unique_id: SYSTEMAIR_REG_FAN_SYSTEM_CURVE_EF
+      - name: "Fan Control Type"
+        address: 137
+        slave: 1
+        scan_interval: 120
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_FAN_CONTROL_TYPE
+      - name: "Interlock State"
+        address: 138
+        slave: 1
+        scan_interval: 10
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_FAN_INTERLOCK
+
+      # 2xx - Registers for heater control
+      - name: "Heater Type"
+        address: 200
+        slave: 1
+        scan_interval: 300
+        input_type: holding
         unique_id: SYSTEMAIR_REG_HC_HEATER_TYPE
-      - name: "Temperature level"
+      - name: "Temperature Level"
         address: 206
         slave: 1
         input_type: holding
         unique_id: SYSTEMAIR_REG_HC_TEMP_LVL
-      - name: "Set point temperature"
+      - name: "Set Point Temperature"
         address: 207
         slave: 1
+        scan_interval: 20
         input_type: holding
         device_class: temperature
         state_class: measurement
@@ -111,9 +141,10 @@
         offset: 0
         precision: 1
         unique_id: SYSTEMAIR_REG_HC_TEMP_SP
-      - name: "Supply temperature"
+      - name: "Temperatur Supply"
         address: 213
         slave: 1
+        scan_interval: 20
         input_type: holding
         device_class: temperature
         state_class: measurement
@@ -123,9 +154,10 @@
         offset: 0
         precision: 1
         unique_id: SYSTEMAIR_REG_REG_HC_TEMP_SUPPLY
-      - name: "Extract temperature"
+      - name: "Temperatur Eextract"
         address: 214
         slave: 1
+        scan_interval: 20
         input_type: holding
         device_class: temperature
         state_class: measurement
@@ -135,9 +167,10 @@
         offset: 0
         precision: 1
         unique_id: SYSTEMAIR_REG_HC_TEMP_EXTRACT
-      - name: "Exhaust/preheat temperature"
+      - name: "Temperatur Exhaust/Preheat"
         address: 215
         slave: 1
+        scan_interval: 20
         input_type: holding
         device_class: temperature
         state_class: measurement
@@ -147,9 +180,10 @@
         offset: 0
         precision: 1
         unique_id: SYSTEMAIR_REG_HC_TEMP_EXHAUST/PREHEAT
-      - name: "Overheating/frostprotect temperature"
+      - name: "Temperatur Overheating/Frostprotect"
         address: 216
         slave: 1
+        scan_interval: 20
         input_type: holding
         device_class: temperature
         state_class: measurement
@@ -159,9 +193,10 @@
         offset: 0
         precision: 1
         unique_id: SYSTEMAIR_REG_HC_TEMP_OVERHEATING/FROSTPROTECT
-      - name: "Outdoor temperature"
+      - name: "Temperatur Outdoor"
         address: 217
         slave: 1
+        scan_interval: 20
         input_type: holding
         device_class: temperature
         state_class: measurement
@@ -171,9 +206,10 @@
         offset: 0
         precision: 1
         unique_id: SYSTEMAIR_REG_HC_TEMP_OUTDOOR
-      - name: "Set point temperature degrees"
+      - name: "Set Point Degrees"
         address: 221
         slave: 1
+        scan_interval: 20
         input_type: holding
         device_class: temperature
         state_class: measurement
@@ -183,25 +219,42 @@
         offset: 0
         precision: 1
         unique_id: SYSTEMAIR_REG_HC_TEMP_SP_DEG
-      - name: "Preheater type"
+      - name: "Preheater Type"
         address: 219
         slave: 1
+        scan_interval: 20
         input_type: holding
         unique_id: SYSTEMAIR_REG_HC_PREHEATER_TYPE
 
-# Registers for the damper
-      - name: "Damper voltage"
+      # 3xx - Registers for the damper
+      - name: "Damper Power Measure"
         address: 300
         slave: 1
+        scan_interval: 10
         input_type: holding
         device_class: voltage
         unit_of_measurement: V
         scale: 0.1
         precision: 1
         unique_id: SYSTEMAIR_REG_DAMPER_PWM
+      - name: "Rotor State"
+        address: 350
+        slave: 1
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_SYSTEM_ROTOR_STATE
+      - name: "System Rotor Type"
+        address: 352
+        slave: 1
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_SYSTEM_ROTOR_TYPE
+      - name: "Passive House"
+        address: 353
+        slave: 1
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_SYSTEM_PASSIVE_HOUSE
 
-# Registers for RH sensor
-      - name: "RH sensor value"
+      # 4xx - Registers for RH sensor
+      - name: "RH Sensor Value"
         address: 380
         slave: 1
         scan_interval: 300
@@ -210,16 +263,52 @@
         state_class: measurement
         unique_id: SYSTEMAIR_RH_SENSOR_VALUE
 
-# Registers for system parameters
-      - name: "System type"
+      # 5xx - Registers for system parameters
+      - name: "System Type"
         address: 500
         slave: 1
         scan_interval: 300
         input_type: holding
         unique_id: SYSTEMAIR_REG_SYSTEM_TYPE
+      - name: "Main program version, high"
+        address: 501
+        slave: 1
+        scan_interval: 300
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_SYSTEM_PROG_V_HIGH
+      - name: "Main program version, middle"
+        address: 502
+        slave: 1
+        scan_interval: 300
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_SYSTEM_PROG_V_MID
+      - name: "Main program version, low"
+        address: 503
+        slave: 1
+        scan_interval: 300
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_SYSTEM_PROG_V_LOW
+      - name: "Boot program version, high"
+        address: 504
+        slave: 1
+        scan_interval: 300
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_SYSTEM_BOOT_PROG_V_HIGH
+      - name: "Boot program version, middle"
+        address: 505
+        slave: 1
+        scan_interval: 300
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_SYSTEM_BOOT_PROG_V_MID
+      - name: "Boot program version, low"
+        address: 506
+        slave: 1
+        scan_interval: 300
+        input_type: holding
+        unique_id: SYSTEMAIR_REG_SYSTEM_BOOT_PROG_V_LOW
 
-# Registers for the filter
-      - name: "Filter days"
+      # 6xx - Registers for the filter
+      - name: "Filter Days"
         address: 601
         slave: 1
         scan_interval: 900
@@ -227,30 +316,215 @@
         unit_of_measurement: days
         unique_id: SYSTEMAIR_FILTER_DAYS
 
-# registers for alarms
-      - name: "Alarms"
+      # 8xx - Registers for alarms
+      - name: "Alarms All"
         address: 800
         slave: 1
+        scan_interval: 20
         input_type: input
         unique_id: SYSTEMAIR_REG_ALARMS_ALL
 
-# Register for demand control
-      - name: "RH winter"
+      # 8xx - Register for demand control
+      - name: "RH SP Winter"
         address: 862
         slave: 1
+        scan_interval: 10
         unit_of_measurement: "%"
         state_class: measurement
         input_type: holding
         unique_id: SYSTEMAIR_REG_DEMC_RH_SP_WINTER
-      - name: "Sommer-/Vintermodus"
+      - name: "Summer/Winter Mode"
         address: 863
         slave: 1
-        input_type: holding
+        scan_interval: 120
+        input_type: input
         unique_id: SYSTEMAIR_REG_DEMC_SUMMER_WINNTER_MODE
 
-#  Register for wireless network
-      - name: "Wireless connections"
+      # 9xx - Register for wireless network
+      - name: "Wireless Node 1 Type"
         address: 900
         slave: 1
+        scan_interval: 120
         input_type: holding
         unique_id: SYSTEMAIR_REG_WL_NODE_1_TYPE
+
+    # Binary sensors
+    binary_sensors:
+      - name: "Allow Manual Fan"
+        address: 1808
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_FAN_ALLOW_MANUAL_FAN_STOP_COIL
+      - name: "Status Temperature Sensor 1"
+        address: 3488
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_HC_TEMP_STATE_1
+      - name: "Status Temperature Sensor 2"
+        address: 3489
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_HC_TEMP_STATE_2
+      - name: "Status Temperature Sensor 3"
+        address: 3490
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_HC_TEMP_STATE_3
+      - name: "Status Temperature Sensor 4"
+        address: 3491
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_HC_TEMP_STATE_4
+      - name: "Status Temperature Sensor 5"
+        address: 3492
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_HC_TEMP_STATE_5
+      - name: "Rotor Relay Active"
+        address: 5616
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_ROTOR_RELAY_ACTIVE
+      - name: "Weekplan Active"
+        address: 6400
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_WP_ACTIVE
+      - name: "Defroster Unbalance Allowed"
+        address: 10432
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_DEFR_UNBAL_ALLOWED
+      - name: "Digital Input 1"
+        address: 11200
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_DI_1
+      - name: "Digital Input 2"
+        address: 11201
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_DI_2
+      - name: "Digital Input 3"
+        address: 11202
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_DI_3
+      - name: "Heater ON/OFF"
+        address: 11203
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_DI_HEATER_ONOFF
+      - name: "Boost Mode"
+        address: 11204
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_DI_BOOST_MODE
+      - name: "DI Rotor/Damper"
+        address: 11205
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_DI_ROTOR_DAMPER
+      - name: "Home Leave/Away"
+        address: 11206
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_DI_HOMELEAVE_AWAY
+      - name: "Relay Preheater"
+        address: 12000
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_PCU_PB_PREHEATER
+      - name: "Relay Reheater"
+        address: 12001
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_PCU_PB_REHEATER
+      - name: "Relay Common pre/reheater"
+        address: 12002
+        slave: 1
+        input_type: coil
+        unique_id: SYSTEMAIR_REG_PCU_PB_COMMON
+      - name: "Alarms Filter"
+        address: 12800
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_FILTER
+      - name: "Alarm Fan"
+        address: 12801
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_FAN
+    #  - name: "Alarm not used"
+    #    address: 12802
+    #    slave: 1
+    #    input_type: coil
+    #    device_class: problem
+    #    unique_id: SYSTEMAIR_REG_ALARMS_NOTUSED
+      - name: "Alarm Rotor"
+        address: 12803
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_ROTOR
+      - name: "Alarm Frost"
+        address: 12804
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_FROST
+      - name: "Alarm PCU-PB"
+        address: 12805
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_PCUPB
+      - name: "Alarm Temperature Sensors"
+        address: 12806
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_TEMPSENS
+      - name: "Alarm Emergency Thermostat"
+        address: 12807
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_EMGTHERM
+      - name: "Alarm Damper"
+        address: 12808
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_DAMPER
+      - name: "Alarm Low SS"
+        address: 12809
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_LOW_SS
+      - name: "Alarm Defroster"
+        address: 12810
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_DEFROST
+      - name: "Alarm RH Sensor"
+        address: 12811
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_RH_SENSOR
+      - name: "Alarm Relay Active"
+        address: 12816
+        slave: 1
+        input_type: coil
+        device_class: problem
+        unique_id: SYSTEMAIR_REG_ALARMS_RELAY_ACTIVE
