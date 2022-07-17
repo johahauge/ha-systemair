@@ -1,4 +1,4 @@
-# ha-systemair
+# Systemair on Home Assistant
 Systemair modbus yaml-files for Home Assistant with modbus over TCP. Copy the content or files to your Home Assistant installation.
 
 Applies to older models:
@@ -19,4 +19,6 @@ Applies to older models:
     VTC200
     VTC100
 
-Reference the Systemair modbus reference PDF for more information and registers. You have to do some manual editing to make it work with your setup.
+Not all registers are included.
+Reference the Systemair modbus PDF for more information and registers. 
+You have to do some manual editing to make it work with your setup.
